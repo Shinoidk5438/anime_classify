@@ -1,23 +1,18 @@
-# 赛博拍屏鉴定师——帮您一眼丁真分辨截图与拍屏
+# 赛博插画鉴定师——帮您一眼丁真分辨冻鳗插画和杂鱼
 ## 说明
 
-本项目模型基于 `yolov8x-cls` 模型(v8.20)训练，大力出奇迹。
+本项目模型基于 `yolov8m-cls` 模型(v8.20)训练
 
-本项目提供 `best.pt` `best.onnx` 三个模型，其中onnx格式可显著提升CPU的运行效率，pt格式为原始格式，可自行导出。
-
-由于训练集不足，当前准确率仍然抽象。
+本项目提供 `best.pt` `best.onnx` 两个模型，其中onnx格式可显著提升CPU的运行效率，pt格式为原始格式，可自行导出。
 
 模型会将图片分为三类
 
-- cameracap: 拍屏
-- others: 啥也不是
-- screenshot: 截图
-
-增设二分类模型，只区分是否为拍屏，准确率较高。分别为 `best-2cls.pt` `best-2cls.onnx` 。
+- anime: 冻鳗插画
+- others: 不是冻鳗插画
 
 ## 使用
 
-- 从 [release](https://github.com/ravizhan/screenshot_classify/releases) 下载训练好的模模型
+- 从 [release](https://github.com/Shinoidk5438/anime_classify/releases) 下载训练好的模模型
 
 - 将测试图片放入 `test_img` 目录下
 
@@ -32,20 +27,12 @@
   ``` bash
   python ./main.py
   ```
-
-## 贡献
-
-如果您觉得模型效果不够好，不要犹豫，将您的抽象图片即刻通过 [Pull Request](https://github.com/ravizhan/screenshot_classify/pulls) 提交。我将尽快更新模型。
-
-请将图片归类放入对应的文件夹内，使用 `rename.ps1` 一键重命名，文件名统一为 `SHA256hash` ，以避免重名，文件格式仅接受 `JPG`，提交时请尽量将图片压缩至2MB以下。 
-
-**注意**：请确保您提交的图片**已脱敏**且**无版权问题**，您的图片将仅会用于训练目的。
-
 ## 鸣谢
 
 感谢 [ultralytics](https://github.com/ultralytics/ultralytics) 提供yolov8预训练模型
 
 感谢 [所有贡献者](https://github.com/ravizhan/screenshot_classify/graphs/contributors)，无论您是提供了图片或是代码
+感谢 [灵感来源及数据来源](https://github.com/ravizhan/screenshot_classify/)，本项目在others类中采用了来自该项目的数据集
 
 ## 协议
 
