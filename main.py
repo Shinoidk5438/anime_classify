@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import os
 
-tag = {0: 'anime', 1: 'others'}
+tag = {1: 'anime', 0: 'others'}
 
 session = onnxruntime.InferenceSession("best-int8.onnx")
 model_inputs = session.get_inputs()
