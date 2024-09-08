@@ -18,7 +18,7 @@ if __name__ == "__main__":
         top1_name  = names[top1_label]
         print(f"{file} is {top1_name}, label = {top1_label}, confidence = {top1_conf:.4f}")
 
-print("Press 'Enter' 2 exit")
+
 input()
 
     
