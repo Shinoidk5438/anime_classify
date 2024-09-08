@@ -1,25 +1,22 @@
-import time
-import onnxruntime
-import numpy as np
+#下载好的第一时间请根据中文进行目录修改
+#Please correct the code following the Chinese
 import cv2
+from ultralytics import YOLO
 import os
+if __name__ == "__main__":
 
-tag = {1: 'anime', 0: 'others'}
+    model = YOLO("修改成你的模型目录/last.pt")
+    filenames = os.listdir(r"修改成你的图片存放目录")
+    for file in filenames:
+        img = cv2.imread("修改成你的图片目录"+file)
+        result = model(img)[0]
+        names  = result.names
+        top1_label = result.probs.top1
+        top5_label = result.probs.top5
+        top1_conf  = result.probs.top1conf
+        top5_conf  = result.probs.top5conf
+        top1_name  = names[top1_label]
+        print(f"{file} is {top1_name}, label = {top1_label}, confidence = {top1_conf:.4f}")
 
-session = onnxruntime.InferenceSession("best-int8.onnx")
-model_inputs = session.get_inputs()
 
-filenames = os.listdir(r'./test_img')
-for file in filenames:
-    img = cv2.cvtColor(cv2.imread("./test_img/"+file), cv2.COLOR_BGR2RGB)
-    img = cv2.resize(img, (1024, 1024))
-    image_data = np.array(img) / 255.0
-    image_data = np.transpose(image_data, (2, 0, 1))
-    image_data = np.expand_dims(image_data, axis=0).astype(np.float32)
-    input = {"images": image_data}
-    t = time.time()
-    output = session.run(None, input)
-    tt = (time.time() - t)*1000
-    predicted_class = np.argmax(output[0], axis=1)[0]
-    confidence = np.max(output[0], axis=1)[0]
-    print(file,tag[predicted_class], confidence * 100,tt,"ms")
+    
